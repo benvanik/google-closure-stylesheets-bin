@@ -15,7 +15,15 @@ echo "Updating to the latest Closure Stylesheets..."
 
 # TODO(benvanik): closure-stylesheets (need -latest)
 # TODO(benvanik): compile from source
-echo "WARNING: closure-stylesheets doesn't have a -latest, manually check:"
-echo "http://code.google.com/p/closure-stylesheets/"
+# echo "WARNING: closure-stylesheets doesn't have a -latest, manually check:"
+# echo "http://code.google.com/p/closure-stylesheets/"
+
+git clone https://code.google.com/p/closure-stylesheets/ build-temp
+cd build-temp
+patch -p1 < ../patch.diff
+ant
+cp build/closure-stylesheets.jar ../
+cd ..
+rm -rf build-temp
 
 echo ""

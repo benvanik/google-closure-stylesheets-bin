@@ -1,0 +1,37 @@
+diff --git a/src/com/google/common/css/compiler/commandline/ClosureCommandLineCompiler.java b/src/com/google/common/css/compiler/commandline/ClosureCommandLineCompiler.java
+index e701726..16f0c04 100644
+--- a/src/com/google/common/css/compiler/commandline/ClosureCommandLineCompiler.java
++++ b/src/com/google/common/css/compiler/commandline/ClosureCommandLineCompiler.java
+@@ -143,12 +143,20 @@ public class ClosureCommandLineCompiler extends DefaultCommandLineCompiler {
+         "Allow unrecognized properties.")
+     private boolean allowUnrecognizedProperties = false;
+ 
++    @Option(name = "--no-eliminate-dead-styles", usage =
++        "Prevents elimination of dead styles/duplicates/etc.")
++    private boolean noEliminateDeadStyles = false;
++
+     @Option(name = "--vendor", usage =
+         "Creates browser-vendor-specific output by stripping all proprietary "
+         + "browser-vendor properties from the output except for those "
+         + "associated with this vendor.")
+     private Vendor vendor = null;
+ 
++    @Option(name = "--css-renaming-prefix",
++        usage = "Prefix for renamed classes.")
++    private String cssRenamingPrefix = null;
++
+     @Option(name = "--excluded-classes-from-renaming", usage =
+         "Pass the compiler a list of CSS class names that shoudn't be renamed.")
+     private List<String> excludedClassesFromRenaming = Lists.newArrayList();
+@@ -195,7 +203,10 @@ public class ClosureCommandLineCompiler extends DefaultCommandLineCompiler {
+       builder.setProcessDependencies(true);
+       builder.setExcludedClassesFromRenaming(excludedClassesFromRenaming);
+       builder.setSimplifyCss(true);
+-      builder.setEliminateDeadStyles(true);
++      builder.setEliminateDeadStyles(!noEliminateDeadStyles);
++      if (cssRenamingPrefix != null) {
++        builder.setCssRenamingPrefix(cssRenamingPrefix);
++      }
+       builder.setCssSubstitutionMapProvider(renamingType
+           .getCssSubstitutionMapProvider());
+       builder.setOutputRenamingMapFormat(outputRenamingMapFormat);
