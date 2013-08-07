@@ -1,3 +1,24 @@
+diff --git a/src/com/google/common/css/MinimalSubstitutionMap.java b/src/com/google/common/css/MinimalSubstitutionMap.java
+index fb46c0a..7b3da3f 100644
+--- a/src/com/google/common/css/MinimalSubstitutionMap.java
++++ b/src/com/google/common/css/MinimalSubstitutionMap.java
+@@ -34,16 +34,12 @@ public class MinimalSubstitutionMap implements SubstitutionMap {
+   private static final char[] START_CHARS = {
+       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+       'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+-      'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+   };
+
+   /** Possible non-first chars in a CSS class name */
+   private static final char[] CHARS = {
+       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+       'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+-      'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+       '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+   };
+
 diff --git a/src/com/google/common/css/compiler/commandline/ClosureCommandLineCompiler.java b/src/com/google/common/css/compiler/commandline/ClosureCommandLineCompiler.java
 index 835155c..42828ee 100644
 --- a/src/com/google/common/css/compiler/commandline/ClosureCommandLineCompiler.java
@@ -5,7 +26,7 @@ index 835155c..42828ee 100644
 @@ -143,6 +143,10 @@ public class ClosureCommandLineCompiler extends DefaultCommandLineCompiler {
          "Allow unrecognized properties.")
      private boolean allowUnrecognizedProperties = false;
- 
+
 +    @Option(name = "--no-eliminate-dead-styles", usage =
 +        "Prevents elimination of dead styles/duplicates/etc.")
 +    private boolean noEliminateDeadStyles = false;
